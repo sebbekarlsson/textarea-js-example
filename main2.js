@@ -1,7 +1,5 @@
 const area1 = document.getElementById("input-area");
 const area2 = document.getElementById("output-area");
+const spinner = document.getElementById("spinner");
 
-area1.addEventListener(
-    'keyup',
-    (e) => area2.value = e.target.value.split("").reverse().join("")
-);
+const myView = new textView(area1, area2, spinner);

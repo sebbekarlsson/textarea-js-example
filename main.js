@@ -14,20 +14,13 @@ function reverseText(text) {
     return finalText;
 }
 
-function whenKeyUp(event) {
-    const textValue = event.target.value; // texten fran input faltet
-    const textValueBackwards = reverseText(textValue); // gor texten baklanges
-
-    area2.value = textValueBackwards;
-}
-
-area1.addEventListener("keyup", whenKeyUp);
 
 /* ======================================================================== */
 
 // denna funktion skapar en div med text i, sedan returnerar vi den.
 function createSquare() {
     const square = document.createElement("div");
+    square.style.display = "none"; // det gor elementet osynligt
     square.innerText = "You are typing something!";
     return square;
 }
@@ -41,14 +34,26 @@ function insertSquare(square, parent) {
     parent.appendChild(square);
 }
 
+const mySquare = createSquare();
+insertSquare(mySquare, document.body);
 
 // Denna funktion kors nar anvandaren trycker ned en tangent.
 function whenKeyDown(event) {
-    const mySquare = createSquare();
-    insertSquare(mySquare, document.body);
+    mySquare.style.display = "block"; // gor elementet synligt
 }
 
 // vi lagger till en "keydown" eventlistener pa varan forsta textarea.
 area1.addEventListener("keydown", whenKeyDown);
 
-// rack upp handen nar det fungerar :)
+function whenKeyUp(event) {
+    const textValue = event.target.value; // texten fran input faltet
+    const textValueBackwards = reverseText(textValue); // gor texten baklanges
+
+    area2.value = textValueBackwards;
+
+    mySquare.style.display = "none"; // gor elementet osynligt.
+}
+
+area1.addEventListener("keyup", whenKeyUp);
+// rack upp handen nar det fungerar och texten bara
+// syns nar du skriver :)
